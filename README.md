@@ -17,4 +17,4 @@ Type `make` to compile the functions and now you can use ***libft.a***
   
   **115/100**
 
-![C library](https://nareshit.com/wp-content/uploads/2018/08/C-Programming-online-training-nareshit.jpg)
+![C library](https://lh3.googleusercontent.com/proxy/6snp6Dbi66fqM62HOZB6g5wv_wBEL6TvFXqBnoksWsqSPaX7LBXv-5Q0uHpws_Gy4dKQcPZrQarKt8x5NliU-vdTaWNx7UiJ5IOG81Ro5D5MaDw5MJKWK7p8dGvDOyCl)
