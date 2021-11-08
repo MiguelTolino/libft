@@ -3,62 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abello-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 19:26:10 by mmateo-t          #+#    #+#             */
-/*   Updated: 2021/11/08 17:07:52 by mmateo-t         ###   ########.fr       */
+/*   Created: 2020/01/16 13:12:01 by abello-r          #+#    #+#             */
+/*   Updated: 2021/11/08 17:28:40 by mmateo-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	is_negative(int n, int *nbr, int len)
+static char	*ft_array(char *x, unsigned int number, long int len)
 {
-	if (n < 0)
+	while (number > 0)
 	{
-		*nbr = -n;
-		len++;
+		x[len--] = 48 + (number % 10);
+		number = number / 10;
 	}
-	else
-		*nbr = n;
+	return (x);
 }
 
-void	ft_aux(size_t n, int len, char *str)
+static long int	ft_len(int n)
 {
-	if (n < 0)
-		ft_fill(-n, len - 1, str);
-	else
-		ft_fill(n, len - 1, str);
-}
+	int					len;
 
-static void	ft_fill(size_t n, int i, char *str)
-{
-	if (n >= 10)
-		ft_fill(n / 10, i - 1, str);
-	str[i] = n % 10 + '0';
+	len = 0;
+	if (n <= 0)
+		len = 1;
+	while (n != 0)
+	{
+		len++;
+		n = n / 10;
+	}
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*str;
-	int		nbr;
-	int		len;
+	char				*x;
+	long int			len;
+	unsigned int		number;
+	int					sign;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	len = 1;
-	is_negative(n, nbr, len);
-	while (nbr)
-	{
-		nbr /= 10;
-		len++;
-	}
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
+	sign = 1;
+	len = ft_len(n);
+	x = (char *)malloc(sizeof(char) * (len + 1));
+	if (!(x))
 		return (NULL);
-	str[len] = '\0';
-	ft_aux(n, len, *str);
+	x[len--] = '\0';
+	if (n == 0)
+		x[0] = '0';
 	if (n < 0)
-		str[0] = '-';
-	return (str);
+	{
+		sign *= -1;
+		number = n * -1;
+		x[0] = '-';
+	}
+	else
+		number = n;
+	x = ft_array(x, number, len);
+	return (x);
 }
